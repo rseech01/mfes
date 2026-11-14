@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Miami Flat Earth Society</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Monoton&family=Limelight&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Layout idea: a night on Ocean Drive. Deco neon sign up top, then the club's
+     business laid out like hotel signage along a perfectly level horizon. */
+  --night: #170b2f;
+  --night-2: #221245;
+  --flamingo: #ff4fa3;
+  --aqua: #3ef0de;
+  --deco: #ffd27a;
+  --sand: #f7ead0;
+  --sand-dim: #cbb9d9;
+  --font-neon: "Monoton", "Limelight", cursive;
+  --font-deco: "Limelight", Georgia, serif;
+  --font-body: "Bricolage Grotesque", system-ui, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--night);
+  color: var(--sand);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.55;
+}
+a { color: var(--aqua); }
+h1, h2, h3 { text-wrap: balance; margin: 0; font-weight: 400; }
+:focus-visible { outline: 3px solid var(--aqua); outline-offset: 3px; }
+
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+/* ---------- ticker ---------- */
+.ticker {
+  background: var(--flamingo);
+  color: var(--night);
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  overflow: hidden;
+  white-space: nowrap;
+  border-bottom: 2px solid var(--night);
+}
+.ticker-track { display: inline-flex; gap: 48px; padding: 8px 0; animation: tick 60s linear infinite; }
+.ticker-track span::before { content: "◆"; margin-right: 12px; }
+@keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ---------- hero ---------- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 100%, #ff7a59 0%, #ff4fa3 30%, transparent 70%),
+    linear-gradient(180deg, var(--night) 0%, var(--night-2) 60%, #3a1650 100%);
+  padding: 56px 0 0;
+  text-align: center;
+}
+.est {
+  font-family: var(--font-deco);
+  color: var(--deco);
+  letter-spacing: .3em;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+.sign {
+  font-family: var(--font-neon);
+  font-size: clamp(44px, 10vw, 116px);
+  line-height: 1.02;
+  margin: 18px 0 8px;
+  color: #fff3fa;
+  text-shadow:
+    0 0 4px #fff,
+    0 0 12px var(--flamingo),
+    0 0 28px var(--flamingo),
+    0 0 60px var(--flamingo);
+  animation: flicker 7s infinite;
+}
+.sign .aq {
+  display: block;
+  font-size: .5em;
+  color: #eafffd;
+  text-shadow: 0 0 4px #fff, 0 0 12px var(--aqua), 0 0 30px var(--aqua), 0 0 60px var(--aqua);
+  animation: none;
+}
+@keyframes flicker {
+  0%, 91%, 93%, 96%, 100% { opacity: 1; }
+  92%, 95% { opacity: .55; }
+}
+.tag {
+  font-size: clamp(18px, 2.4vw, 22px);
+  max-width: 34ch;
+  margin: 10px auto 0;
+  color: var(--sand);
+}
+.tag em { color: var(--deco); font-style: normal; font-weight: 600; }
+
+.horizon {
+  position: relative;
+  height: 210px;
+  margin-top: 36px;
+}
+.sun {
+  position: absolute; left: 50%; bottom: 58px;
+  width: 190px; height: 95px;
+  transform: translateX(-50%);
+  border-radius: 190px 190px 0 0;
+  background: linear-gradient(180deg, #ffd27a, #ff7a59);
+  -webkit-mask-image: repeating-linear-gradient(180deg, #000 0 14px, transparent 14px 19px);
+  mask-image: repeating-linear-gradient(180deg, #000 0 14px, transparent 14px 19px);
+  box-shadow: 0 0 60px rgba(255, 122, 89, .6);
+}
+.line {
+  position: absolute; left: 0; right: 0; bottom: 58px; height: 3px;
+  background: var(--aqua);
+  box-shadow: 0 0 10px var(--aqua), 0 0 24px var(--aqua);
+}
+.line-label {
+  position: absolute; right: 20px; bottom: 66px;
+  font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--aqua);
+}
+.bay {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 58px;
+  background: repeating-linear-gradient(180deg, #0f3d5c 0 6px, #14204a 6px 12px);
+}
+.palm { position: absolute; bottom: 58px; width: 120px; fill: #0d0620; }
+.palm.l { left: 3%; }
+.palm.r { right: 4%; transform: scaleX(-1); width: 150px; }
+
+/* ---------- level ---------- */
+.levelbox {
+  display: inline-flex; align-items: center; gap: 14px;
+  background: rgba(23, 11, 47, .75);
+  border: 1px solid var(--deco);
+  padding: 10px 16px; margin-top: 22px;
+  font-size: 14px;
+}
+.vial {
+  position: relative; width: 150px; height: 22px;
+  border-radius: 11px;
+  background: #b9f54a;
+  box-shadow: inset 0 0 0 2px #2b3d0c;
+}
+.vial::before, .vial::after {
+  content: ""; position: absolute; top: 2px; bottom: 2px; width: 2px; background: #2b3d0c;
+}
+.vial::before { left: 54px; } .vial::after { right: 54px; }
+.bubble {
+  position: absolute; top: 4px; left: calc(50% - 18px);
+  width: 36px; height: 14px; border-radius: 7px; background: #f4ffd8;
+  transition: left 1.2s cubic-bezier(.3, 1.6, .5, 1);
+}
+
+/* ---------- sections ---------- */
+section { padding: 72px 0; }
+.kicker {
+  font-family: var(--font-deco); color: var(--flamingo);
+  letter-spacing: .25em; text-transform: uppercase; font-size: 13px; margin-bottom: 10px;
+}
+h2 { font-family: var(--font-deco); font-size: clamp(32px, 5vw, 52px); line-height: 1.05; color: var(--sand); }
+.lede { max-width: 62ch; color: var(--sand-dim); margin-top: 14px; }
+
+.evidence { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0; margin-top: 36px; border-top: 1px solid #4a2d6b; }
+.ev { padding: 26px 22px 26px 0; border-bottom: 1px solid #4a2d6b; }
+.ev .n { font-family: var(--font-neon); font-size: 40px; color: var(--aqua); line-height: 1; text-shadow: 0 0 14px rgba(62, 240, 222, .5); }
+.ev h3 { font-family: var(--font-body); font-weight: 800; font-size: 20px; margin: 12px 0 6px; }
+.ev p { margin: 0; color: var(--sand-dim); }
+
+/* map */
+.mapgrid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; align-items: center; }
+.mapgrid svg { width: 100%; height: auto; max-width: 480px; display: block; margin: 0 auto; }
+.legend { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 12px; }
+.legend li { display: grid; grid-template-columns: 18px 1fr; gap: 12px; align-items: start; }
+.legend i { width: 18px; height: 18px; border-radius: 50%; margin-top: 4px; }
+
+/* flat-o-meter */
+.meter {
+  background: var(--night-2);
+  border: 1px solid #4a2d6b;
+  border-left: 6px solid var(--aqua);
+  padding: 32px;
+  margin-top: 32px;
+  display: grid; gap: 20px;
+}
+.meter-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: end; }
+label { font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--sand-dim); display: block; margin-bottom: 6px; }
+select, input[type="text"] {
+  font: inherit; color: var(--sand); background: var(--night);
+  border: 1px solid #6b4a8f; padding: 11px 12px; min-width: 240px; border-radius: 0;
+}
+.btn {
+  font: inherit; font-weight: 800; cursor: pointer;
+  background: var(--flamingo); color: var(--night);
+  border: 0; padding: 12px 22px;
+  box-shadow: 0 0 0 0 var(--flamingo);
+  transition: box-shadow .2s, transform .1s;
+}
+.btn:hover { box-shadow: 0 0 22px var(--flamingo); }
+.btn:active { transform: translateY(1px); }
+.reading { display: grid; grid-template-columns: auto 1fr; gap: 24px; align-items: center; }
+.reading .pct { font-family: var(--font-neon); font-size: clamp(48px, 9vw, 84px); color: var(--aqua); line-height: 1; text-shadow: 0 0 18px rgba(62, 240, 222, .55); font-variant-numeric: tabular-nums; }
+.reading p { margin: 0; }
+.reading .verdict { font-weight: 800; font-size: 19px; }
+.reading .note { color: var(--sand-dim); }
+
+/* faq */
+.faq { margin-top: 32px; border-top: 1px solid #4a2d6b; }
+details { border-bottom: 1px solid #4a2d6b; }
+summary { cursor: pointer; padding: 20px 0; font-weight: 800; font-size: 19px; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; font-family: var(--font-deco); color: var(--flamingo); font-size: 26px; line-height: 1; }
+details[open] summary::after { content: "–"; }
+details p { margin: 0 0 22px; max-width: 64ch; color: var(--sand-dim); }
+
+/* events */
+.events { display: grid; gap: 0; margin-top: 32px; border-top: 1px solid #4a2d6b; }
+.event { display: grid; grid-template-columns: 110px 1fr auto; gap: 20px; padding: 20px 0; border-bottom: 1px solid #4a2d6b; align-items: baseline; }
+.event .date { font-family: var(--font-deco); color: var(--deco); font-size: 20px; }
+.event h3 { font-family: var(--font-body); font-weight: 800; font-size: 19px; }
+.event p { margin: 4px 0 0; color: var(--sand-dim); }
+.pill { font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 4px 10px; border: 1px solid currentColor; white-space: nowrap; }
+.pill.aqua { color: var(--aqua); } .pill.pink { color: var(--flamingo); } .pill.gold { color: var(--deco); }
+
+/* tiers */
+.tiers { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; margin-top: 32px; }
+.tier { border: 1px solid #6b4a8f; padding: 26px; display: flex; flex-direction: column; gap: 10px; background: var(--night-2); }
+.tier.hot { border-color: var(--flamingo); box-shadow: 0 0 30px rgba(255, 79, 163, .25); }
+.tier h3 { font-family: var(--font-deco); font-size: 28px; }
+.tier .price { font-weight: 800; color: var(--deco); }
+.tier ul { margin: 6px 0 0; padding-left: 18px; color: var(--sand-dim); }
+
+/* join */
+.join { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 48px; }
+form { display: grid; gap: 18px; }
+form input[type="text"], form select { width: 100%; min-width: 0; }
+.check { display: flex; gap: 10px; align-items: flex-start; text-transform: none; letter-spacing: 0; font-size: 15px; color: var(--sand); font-weight: 400; }
+.check input { margin-top: 5px; accent-color: var(--flamingo); }
+.card {
+  border: 2px solid var(--deco);
+  padding: 28px;
+  background: linear-gradient(135deg, #2a1452, #170b2f);
+  position: relative;
+}
+.card .cname { font-family: var(--font-deco); font-size: 30px; margin: 8px 0; }
+.card .meta { font-size: 14px; color: var(--sand-dim); display: grid; gap: 4px; }
+.card .stamp { position: absolute; right: 18px; top: 18px; font-family: var(--font-neon); color: var(--flamingo); font-size: 22px; transform: rotate(8deg); }
+.err { color: var(--flamingo); font-weight: 600; min-height: 1.4em; margin: 0; }
+
+/* leaders */
+.leaders { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 28px; margin-top: 32px; }
+.leader h3 { font-family: var(--font-body); font-weight: 800; font-size: 19px; }
+.leader .role { color: var(--flamingo); font-size: 13px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; }
+.leader p { color: var(--sand-dim); margin: 6px 0 0; }
+
+footer { border-top: 1px solid #4a2d6b; padding: 40px 0 56px; color: var(--sand-dim); font-size: 15px; }
+footer strong { color: var(--sand); }
+
+.alt { background: #1d0e3b; }
+
+@media (max-width: 760px) {
+  .mapgrid, .join { grid-template-columns: 1fr; }
+  .event { grid-template-columns: 1fr; gap: 6px; }
+  .reading { grid-template-columns: 1fr; }
+  .palm.l { width: 80px; } .palm.r { width: 96px; }
+  .meter { padding: 22px; }
+  select, input[type="text"] { min-width: 0; width: 100%; }
+  .meter-row > div { width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track { animation: none; white-space: normal; flex-wrap: wrap; padding: 8px 20px; gap: 8px 32px; }
+  .sign { animation: none; }
+  .bubble { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="ticker" aria-label="News ticker">
+  <div class="ticker-track">
+    <span>Cyclist on Rickenbacker Causeway reports "a hill." Committee investigating.</span>
+    <span>Brightline confirms its tracks have never once curved down.</span>
+    <span>King tide on Alton Road: water clearly has nowhere to roll off to.</span>
+    <span>Doral warehouse still producing "space photos," neighbors say.</span>
+    <span>Member measures Ocean Drive with a level. Bubble: centered. Again.</span>
+    <span>Cyclist on Rickenbacker Causeway reports "a hill." Committee investigating.</span>
+    <span>Brightline confirms its tracks have never once curved down.</span>
+    <span>King tide on Alton Road: water clearly has nowhere to roll off to.</span>
+    <span>Doral warehouse still producing "space photos," neighbors say.</span>
+    <span>Member measures Ocean Drive with a level. Bubble: centered. Again.</span>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="est">Miami Chapter · Est. 1896 · Before the round-earth lobby got here</div>
+    <h1 class="sign">Flat Earth<span class="aq">Society · Miami</span></h1>
+    <p class="tag">Average elevation: about six feet. <em>We have seen the evidence, and the evidence is Kendall.</em></p>
+    <div class="levelbox" aria-label="Spirit level reading">
+      <div class="vial" aria-hidden="true"><div class="bubble"></div></div>
+      <span>Live reading, Ocean Drive &amp; 10th St: <strong>dead level</strong></span>
+    </div>
+  </div>
+  <div class="horizon" aria-hidden="true">
+    <div class="sun"></div>
+    <svg class="palm l" viewBox="0 0 120 200"><path d="M62 200 C60 150 58 110 64 70 L68 70 C64 110 66 150 68 200 Z"/><path d="M66 72 C40 50 15 55 0 70 C20 52 45 48 66 66 Z"/><path d="M66 72 C55 40 35 25 12 26 C38 22 58 38 68 66 Z"/><path d="M66 70 C80 40 100 30 120 34 C98 34 82 46 70 70 Z"/><path d="M66 72 C92 58 112 66 120 82 C106 68 88 66 68 74 Z"/><path d="M66 70 C68 40 80 20 96 10 C84 24 74 42 70 68 Z"/></svg>
+    <svg class="palm r" viewBox="0 0 120 200"><path d="M62 200 C60 150 58 110 64 70 L68 70 C64 110 66 150 68 200 Z"/><path d="M66 72 C40 50 15 55 0 70 C20 52 45 48 66 66 Z"/><path d="M66 72 C55 40 35 25 12 26 C38 22 58 38 68 66 Z"/><path d="M66 70 C80 40 100 30 120 34 C98 34 82 46 70 70 Z"/><path d="M66 72 C92 58 112 66 120 82 C106 68 88 66 68 74 Z"/></svg>
+    <div class="line"></div>
+    <div class="line-label">Biscayne Bay horizon · 0.000° curvature</div>
+    <div class="bay"></div>
+  </div>
+</header>
+
+<main>
+
+<section id="evidence">
+  <div class="wrap">
+    <div class="kicker">The evidence</div>
+    <h2>Look around, mi amor. Where's the curve?</h2>
+    <p class="lede">Other chapters need telescopes and laser rigs. We have the 305. Every day in Miami is a field study in flatness, and the results have been consistent since Flagler.</p>
+    <div class="evidence">
+      <div class="ev"><div class="n">01</div><h3>We have never seen a hill</h3><p>The only incline in the county is the Rickenbacker Causeway, which the government built. A man-made hill is a confession.</p></div>
+      <div class="ev"><div class="n">02</div><h3>Humidity, not gravity</h3><p>Step outside in August. You are not being pulled toward a spinning ball. You are being pressed flat by the air itself. It's obvious.</p></div>
+      <div class="ev"><div class="n">03</div><h3>The water stays put</h3><p>If the Earth were round, the ocean would roll off. Instead it comes up through the storm drains on a sunny Tuesday and parks on Alton Road.</p></div>
+      <div class="ev"><div class="n">04</div><h3>Hurricanes spin</h3><p>They spin because the Earth is a big flat table and the sky has a ceiling fan. The cone of uncertainty is the only round thing we accept.</p></div>
+      <div class="ev"><div class="n">05</div><h3>The sunset</h3><p>The sun goes down into the Everglades every night. Have you been out on Tamiami Trail after dark? Exactly. Nobody checks.</p></div>
+      <div class="ev"><div class="n">06</div><h3>Ships vanish hull-first</h3><p>Round-earthers say curvature. We say the ships are stuck behind a cruise terminal waiting on the Port of Miami tunnel.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="map" class="alt">
+  <div class="wrap mapgrid">
+    <div>
+      <div class="kicker">Official cartography</div>
+      <h2>Miami is the center of the disc.</h2>
+      <p class="lede">Everybody already knew this. The rest of the world simply orbits around us, culturally and literally. Our chapter cartographer drew this on the back of a pastelito bag and it has held up under peer review.</p>
+      <ul class="legend">
+        <li><i style="background: var(--flamingo)"></i><span><strong>Miami.</strong> The center. Confirmed.</span></li>
+        <li><i style="background: var(--deco)"></i><span><strong>Florida and the Caribbean.</strong> The inner ring. Family lives here.</span></li>
+        <li><i style="background: #6b4a8f"></i><span><strong>Everywhere else.</strong> Includes New York, which keeps sending people down here anyway.</span></li>
+        <li><i style="background: #eafffd"></i><span><strong>The Ice Wall.</strong> The outer edge, and the origin of every snowbird. They arrive each November with sunburn and a Buick. Draw your own conclusions.</span></li>
+      </ul>
+    </div>
+    <svg viewBox="0 0 400 400" role="img" aria-label="Flat earth map with Miami at the center, ringed by Florida and the Caribbean, then everywhere else, then the ice wall">
+      <defs>
+        <radialGradient id="sea" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#1b5b7e"/><stop offset="100%" stop-color="#14204a"/>
+        </radialGradient>
+      </defs>
+      <circle cx="200" cy="200" r="196" fill="#eafffd"/>
+      <circle cx="200" cy="200" r="180" fill="url(#sea)"/>
+      <circle cx="200" cy="200" r="150" fill="none" stroke="#6b4a8f" stroke-width="40" opacity=".55"/>
+      <circle cx="200" cy="200" r="88" fill="none" stroke="#ffd27a" stroke-width="30" opacity=".55"/>
+      <g stroke="#3ef0de" stroke-opacity=".25" fill="none">
+        <circle cx="200" cy="200" r="60"/><circle cx="200" cy="200" r="120"/><circle cx="200" cy="200" r="170"/>
+        <line x1="200" y1="20" x2="200" y2="380"/><line x1="20" y1="200" x2="380" y2="200"/>
+        <line x1="73" y1="73" x2="327" y2="327"/><line x1="327" y1="73" x2="73" y2="327"/>
+      </g>
+      <circle cx="200" cy="200" r="34" fill="#ff4fa3"/>
+      <text x="200" y="206" text-anchor="middle" font-family="Limelight, serif" font-size="17" fill="#170b2f">MIAMI</text>
+      <g font-family="Bricolage Grotesque, sans-serif" font-size="11" font-weight="700" text-anchor="middle">
+        <text x="200" y="128" fill="#ffd27a">KEY WEST (THE DRAIN)</text>
+        <text x="270" y="244" fill="#ffd27a">LA HABANA</text>
+        <text x="128" y="244" fill="#ffd27a">NAPLES</text>
+        <text x="200" y="66" fill="#cbb9d9">NEW YORK (SENDS PEOPLE)</text>
+        <text x="300" y="320" fill="#cbb9d9">BOGOTÁ</text>
+        <text x="96" y="318" fill="#cbb9d9">OHIO (RUMORED)</text>
+        <text x="200" y="393" fill="#170b2f">ICE WALL · SNOWBIRD PORT OF ENTRY</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<section id="flatometer">
+  <div class="wrap">
+    <div class="kicker">Field instrument</div>
+    <h2>Flat-o-Meter</h2>
+    <p class="lede">Pick your neighborhood and we'll take a reading with the chapter's official level, which Tío Rolando bought at the hardware store on Bird Road in 1987.</p>
+    <div class="meter">
+      <div class="meter-row">
+        <div>
+          <label for="hood">Neighborhood</label>
+          <select id="hood">
+            <option value="hialeah">Hialeah</option>
+            <option value="kendall">Kendall</option>
+            <option value="brickell">Brickell</option>
+            <option value="havana">Little Havana</option>
+            <option value="grove">Coconut Grove</option>
+            <option value="wynwood">Wynwood</option>
+            <option value="doral">Doral</option>
+            <option value="beach">Miami Beach</option>
+            <option value="key">Key Biscayne</option>
+            <option value="homestead">Homestead</option>
+          </select>
+        </div>
+        <button class="btn" id="measure" type="button">Take a reading</button>
+      </div>
+      <div class="reading" aria-live="polite">
+        <div class="pct" id="pct">100%</div>
+        <div>
+          <p class="verdict" id="verdict">Hialeah: flat as a tostada.</p>
+          <p class="note" id="note">Seven different bakeries confirmed it. The level didn't even wobble, and neither did the guy double-parked outside.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="alt">
+  <div class="wrap">
+    <div class="kicker">Preguntas frecuentes</div>
+    <h2>Questions from your cousin who "did some reading."</h2>
+    <div class="faq">
+      <details><summary>What about the photos from space?</summary><p>Shot in a warehouse in Doral, between a freight forwarder and a gym that only plays reggaetón. The lighting is great in there.</p></details>
+      <details><summary>Why do planes take longer to fly to Europe than to Bogotá?</summary><p>Customs at MIA. That's it. That's the curvature people are feeling.</p></details>
+      <details><summary>Is the Bermuda Triangle real?</summary><p>It's the drain. Every flat surface needs one. Please stop asking us to go look at it.</p></details>
+      <details><summary>Why can't I see Cuba from the Southernmost Point buoy?</summary><p>Humidity. On a dry day you could see straight to Havana, but Key West has never had a dry day.</p></details>
+      <details><summary>Do you accept round things?</summary><p>Croquetas are cylinders, so they're fine. Pastelitos are flat and therefore sacred. Our treasurer keeps the dues in a Pringles can, which is under review by the ethics committee.</p></details>
+      <details><summary>Is the sea level really rising?</summary><p>Yes, and this is the one part we're dead serious about. Even on a flat earth, Miami-Dade sits a few feet above high tide. Go read the county's resilience plan. Then come to the meeting.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="events">
+  <div class="wrap">
+    <div class="kicker">Calendario</div>
+    <h2>Upcoming gatherings</h2>
+    <div class="events">
+      <div class="event"><div class="date">Nov 14</div><div><h3>King Tide Watch Party</h3><p>Alton Road, 9:30 a.m. Bring rain boots and a folding chair. We'll observe the water refusing to fall off anything.</p></div><span class="pill aqua">Field trip</span></div>
+      <div class="event"><div class="date">Nov 20</div><div><h3>Sunset Into the Everglades</h3><p>Shark Valley parking lot. We wait for the sun to go into the swamp, then we leave before the mosquitoes vote us out.</p></div><span class="pill gold">Observation</span></div>
+      <div class="event"><div class="date">Dec 5</div><div><h3>Art Week Booth: "The Earth" (canvas, flat)</h3><p>One very flat painting of the planet. Asking price $4.2 million. A collector from Aspen has already asked if it comes in round. It does not.</p></div><span class="pill pink">Culture</span></div>
+      <div class="event"><div class="date">Daily</div><div><h3>3:05 Cafecito Summit</h3><p>Any ventanita on Calle Ocho. Order a colada, pass the little cups around, and discuss the shape of things. Quorum is whoever shows up.</p></div><span class="pill gold">Standing</span></div>
+      <div class="event"><div class="date">Jan 10</div><div><h3>Rickenbacker "Hill" Inquiry</h3><p>We ride the causeway with a level taped to a beach cruiser. Lycra cyclists are welcome to testify.</p></div><span class="pill aqua">Investigation</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="membership" class="alt">
+  <div class="wrap">
+    <div class="kicker">Membership</div>
+    <h2>Pick your size.</h2>
+    <div class="tiers">
+      <div class="tier"><h3>Cortadito</h3><div class="price">$3.05 / month</div><p>For the curious.</p><ul><li>Laminated membership card</li><li>Access to the group chat (muted by everyone)</li><li>One (1) pastelito at meetings</li></ul></div>
+      <div class="tier hot"><h3>Colada</h3><div class="price">$30.50 / month</div><p>Meant for sharing. Most popular.</p><ul><li>Everything in Cortadito</li><li>Voting rights on whether Coconut Grove counts</li><li>Your own spirit level, engraved</li><li>Bring four friends and four tiny cups</li></ul></div>
+      <div class="tier"><h3>Bottle Service</h3><div class="price">$305 / month</div><p>For the Brickell crowd.</p><ul><li>Rooftop horizon viewing with sparklers</li><li>A promoter named Jonathan who says the Earth "is a vibe"</li><li>Valet (your car is parked somewhere flat)</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="join">
+  <div class="wrap join">
+    <div>
+      <div class="kicker">Únete</div>
+      <h2>Join the chapter</h2>
+      <p class="lede">Fill this out and we'll print your card. No email required, because we don't trust anything that travels "around the world."</p>
+      <form id="joinform" novalidate>
+        <div><label for="jname">Your name</label><input type="text" id="jname" autocomplete="off" placeholder="Yeni, Brayan, Tío Whoever"></div>
+        <div>
+          <label for="jhood">Where you're from</label>
+          <select id="jhood">
+            <option>Hialeah</option><option>Kendall</option><option>Westchester</option><option>Little Havana</option><option>Brickell</option><option>Doral</option><option>Miami Beach</option><option>Homestead</option><option>"Miami" (actually Broward)</option>
+          </select>
+        </div>
+        <div>
+          <label for="jtier">Membership</label>
+          <select id="jtier"><option>Cortadito</option><option selected>Colada</option><option>Bottle Service</option></select>
+        </div>
+        <label class="check"><input type="checkbox" id="joath"> I solemnly swear I have never seen a hill in Miami-Dade County, the Rickenbacker excepted and under protest.</label>
+        <p class="err" id="jerr" aria-live="polite"></p>
+        <div><button class="btn" type="submit">Print my card</button></div>
+      </form>
+    </div>
+    <div>
+      <div class="card" id="card" aria-live="polite">
+        <div class="stamp">FLAT</div>
+        <div class="kicker" style="margin:0">Member · Miami Chapter</div>
+        <div class="cname" id="cname">Your Name Here</div>
+        <div class="meta">
+          <span id="chood">Neighborhood: TBD</span>
+          <span id="ctier">Tier: Colada</span>
+          <span id="cno">Member No. 305-0000</span>
+          <span>Elevation at home: about 6 ft, give or take a king tide</span>
+        </div>
+      </div>
+      <div class="leaders">
+        <div class="leader"><div class="role">President</div><h3>Tío Rolando</h3><p>Has not left Westchester since 1994 and has never needed to. Owner of the official level.</p></div>
+        <div class="leader"><div class="role">Treasurer</div><h3>Yeni</h3><p>Keeps the dues in a Pringles can. Says it's "a cylinder, which is basically flat if you unroll it."</p></div>
+        <div class="leader"><div class="role">Secretary</div><h3>Brayan (with a Y)</h3><p>Takes minutes in voice notes. Each one is eleven minutes long.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Miami Flat Earth Society</strong> · Meetings at 3:05 p.m., give or take Miami time.</p>
+    <p>This is satire. The Earth is round. Miami, however, really is very flat, and the sea around it really is rising, which is a lot scarier than anything on this page.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var readings = {
+    hialeah:   ["100%", "Hialeah: flat as a tostada.", "Seven different bakeries confirmed it. The level didn't even wobble, and neither did the guy double-parked outside."],
+    kendall:   ["100%", "Kendall: flatter than a strip-mall parking lot, because it is one.", "We measured from Dadeland to the Turnpike. Zero degrees. Four hours in traffic. The traffic is not flat; it's a loop."],
+    brickell:  ["100%", "Brickell: flat, though the buildings try very hard.", "The towers are vertical, which is a different axis and not our department. The ground beneath them floods, which proves our point."],
+    havana:    ["100%", "Little Havana: dead level.", "Measured on a domino table in Máximo Gómez Park. The players asked us to leave because the level was blocking the tiles."],
+    grove:     ["97%", "Coconut Grove: under investigation.", "There's a slight rise along the ridge and a lot of trees hiding things. Our team is monitoring. Also the banyan roots keep moving the level."],
+    wynwood:   ["100%", "Wynwood: flat, and painted.", "Every wall here is a flat surface covered in art about flat surfaces. Nobody has noticed but us."],
+    doral:     ["100%", "Doral: flat, and suspicious.", "This is where the space photos are made. Reading taken from a parking lot behind a warehouse we've agreed not to name."],
+    beach:     ["100%", "Miami Beach: so flat the ocean visits.", "The sand is flat, Collins is flat, and on a full moon Alton Road is flat and underwater. Triple confirmed."],
+    key:       ["100%", "Key Biscayne: flat, but you have to cross the hill.", "Getting there requires the Rickenbacker, which we do not recognize. Once you're on the island, perfectly level."],
+    homestead: ["100%", "Homestead: flat all the way to the edge.", "From here it's a straight line to the Keys and then the drain. Please do not drive past Key West."]
+  };
+  var hood = document.getElementById("hood");
+  var bubble = document.querySelector(".bubble");
+  document.getElementById("measure").addEventListener("click", function () {
+    var r = readings[hood.value];
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!reduce && bubble) {
+      bubble.style.left = "6px";
+      setTimeout(function () { bubble.style.left = "calc(100% - 42px)"; }, 250);
+      setTimeout(function () { bubble.style.left = hood.value === "grove" ? "calc(50% - 10px)" : "calc(50% - 18px)"; }, 600);
+    }
+    document.getElementById("pct").textContent = r[0];
+    document.getElementById("verdict").textContent = r[1];
+    document.getElementById("note").textContent = r[2];
+  });
+
+  var form = document.getElementById("joinform");
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var name = document.getElementById("jname").value.trim();
+    var err = document.getElementById("jerr");
+    if (!name) { err.textContent = "We need a name for the card. A nickname is fine."; return; }
+    if (!document.getElementById("joath").checked) { err.textContent = "You have to take the oath. Tío Rolando insists."; return; }
+    err.textContent = "";
+    var h = document.getElementById("jhood").value;
+    var t = document.getElementById("jtier").value;
+    var num = 0; for (var i = 0; i < name.length; i++) { num = (num * 31 + name.charCodeAt(i)) % 10000; }
+    document.getElementById("cname").textContent = name;
+    document.getElementById("chood").textContent = "Neighborhood: " + h;
+    document.getElementById("ctier").textContent = "Tier: " + t;
+    document.getElementById("cno").textContent = "Member No. 305-" + String(num).padStart(4, "0");
+    document.getElementById("card").scrollIntoView({ behavior: "smooth", block: "center" });
+  });
+})();
+</script>
+</body>
+</html>
